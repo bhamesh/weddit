@@ -8,7 +8,7 @@ frappe.ui.form.on('Weddit Candidate', {
 	validate: function(frm) {
 		if (frm.doc.mobile_no.length !=10) 
 		{
-			frappe.throw (__("mobile number invalid!");
+			frappe.throw (__("mobile number invalid!"));
 		}
 	}
 });
