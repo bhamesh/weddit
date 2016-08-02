@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include weddit *.css
+recursive-include weddit *.csv
+recursive-include weddit *.html
+recursive-include weddit *.ico
+recursive-include weddit *.js
+recursive-include weddit *.json
+recursive-include weddit *.md
+recursive-include weddit *.png
+recursive-include weddit *.py
+recursive-include weddit *.svg
+recursive-include weddit *.txt
+recursive-exclude weddit *.pyc
