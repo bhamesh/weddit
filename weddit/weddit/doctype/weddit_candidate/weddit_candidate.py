@@ -45,10 +45,10 @@ class WedditCandidate(Document):
 			# 7-digit number, should include area code
 			frappe.throw(_("INCLUDE YOUR AREA CODE OR ELSE."))
 
-	# def format_number(self):
-	# 	if len(self.mobile_no) == 10:
-	# 		# basically return XXX-XXX-XXXX
-	# 		return re.compile(r'^(\d{3})(\d{3})(\d{4})$').sub('$1-$2-$3', self.mobile_no)
-	# 	else:
-	# 		# basically return +XXX-XXX-XXX-XXXX
-	# 		return re.compile(r'^(\d+)(\d{3})(\d{3})(\d{4})$').sub('+$1-$2-$3-$4', self.mobile_no)
+	def format_number(self):
+	 	if len(self.mobile_no) == 10:
+			# basically return XXX-XXX-XXXX
+	 		return re.compile(r'^(\d{3})(\d{3})(\d{4})$').sub('$1-$2-$3', self.mobile_no)
+	 	else:
+	 		# basically return +XXX-XXX-XXX-XXXX
+	 		return re.compile(r'^(\d+)(\d{3})(\d{3})(\d{4})$').sub('+$1-$2-$3-$4', self.mobile_no)
