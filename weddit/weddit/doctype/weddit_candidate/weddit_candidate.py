@@ -40,15 +40,15 @@ class WedditCandidate(Document):
 			return False 
 		
 	def validate_mobile(self):
-		number = re.compile(r'[^0-9]').sub('', self.mobile_no)
+		number = re.compile(r'^(\d+)(\d{3})(\d{3})(\d{4})$').sub('+$1-$2-$3-$4', self.mobile_no)
 		if len(number) != 10:
 			# 7-digit number, should include area code
 			frappe.throw(_("INCLUDE YOUR AREA CODE OR ELSE."))
 
-	def format_number(self):
+	"""def format_number(self):
 	 	if len(self.mobile_no) == 10:
 			# basically return XXX-XXX-XXXX
 	 		return re.compile(r'^(\d{3})(\d{3})(\d{4})$').sub('$1-$2-$3', self.mobile_no)
 	 	else:
 	 		# basically return +XXX-XXX-XXX-XXXX
-	 		return re.compile(r'^(\d+)(\d{3})(\d{3})(\d{4})$').sub('+$1-$2-$3-$4', self.mobile_no)
+	 		return re.compile(r'^(\d+)(\d{3})(\d{3})(\d{4})$').sub('+$1-$2-$3-$4', self.mobile_no)"""
