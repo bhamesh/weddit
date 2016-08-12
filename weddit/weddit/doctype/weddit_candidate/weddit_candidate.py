@@ -7,15 +7,28 @@ import frappe
 import mimetypes 
 import re
 from frappe import _
-from frappe.model.document import Document
+from frappe.website.website_generator import WebsiteGenerator
 
 VALID_IMAGE_MIMETYPES = ["image"]
 
-class WedditCandidate(Document):
+class WedditCandidate(WebsiteGenerator):
+	website = frappe._dict(
+		template = "templates/generators/weddit.html",
+		no_cache = 1
+	)
+
+	# def __init__(self, *args, **kwargs):
+	# 	self.route = None
+	# 	super(WebsiteGenerator, self).__init__(*args, **kwargs)
+
 	def validate(self):
 		self.validate_mobile_no()
 		self.validate_family_members()
 		self.validate_mobile()
+		self.set_route()
+
+	def set_route(self):
+		self.route = self.name
 
 	def validate_mobile_no(self):
 		if len(self.mobile_no) != 10:
@@ -40,7 +53,7 @@ class WedditCandidate(Document):
 			return False 
 		
 	def validate_mobile(self):
-		number = re.compile(r'^(\+91)(\d{3})(\d{3})(\d{4})$').sub('+$1-$2-$3-$4', self.mobile_no)
+		number = re.compile(r'^(\d+)(\d{3})(\d{3})(\d{4})$').sub('+$1-$2-$3-$4', self.mobile_no)
 		if len(number) != 10:
 			# 7-digit number, should include area code
 			frappe.throw(_("INCLUDE YOUR AREA CODE OR ELSE."))

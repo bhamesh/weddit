@@ -1,0 +1,154 @@
+{% extends "templates/web.html" %}
+
+{% block content %}
+
+	<ul class="candidate">
+		<div>
+			<div><strong>Profile Photo</strong></div> 
+			<img src="{{ profile_photo }}"/>
+			</div>	
+		<br>	
+	</ul>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Personal Information
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div><strong>First Name</strong></div>
+						<div>{{ doc.first_name }}</div>
+						<div>
+							<strong>Last Name</strong>
+						</div>
+						 <div>{{ doc.last_name }} </div>		
+						<div>
+							<strong>Gender</strong>
+						</div>
+							<div>{{ doc.gender }} </div>
+						<div>
+							<strong>Marital Status</strong>
+						</div>
+							<div>{{ doc.marital_status }} </div>
+					</div>
+					<div class="panel-footer">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Personal Details
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div><strong>Mobile Number</strong></div>
+						<div>{{ doc.mobile_no }} </div>
+						<div>
+							<strong>City</strong>
+						</div>
+							<div>{{ doc.city }}</div>
+						
+						
+						<div>
+							<strong>Religion</strong>
+						</div>
+						<div>{{ doc.religion }}</div>
+						<div>
+							<strong>Caste</strong>
+						</div>
+						<div>{{ doc.caste }}</div>						
+						<div>
+							<strong>Mother Tongue</strong>
+						</div>
+						<div>{{ doc.mother_tongue }}</div>
+					</div>
+					<div class="panel-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<hr>
+	<h2>Other Information</h2>
+
+	<div class="container">
+		<table class="table">
+		{% for familymember in doc.family_members %}
+			<thead>
+			<tr>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Relation</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>{{ familymember.first_name }}</td>
+				<td>{{ familymember.last_name }}</td>
+				<td>{{ familymember.relation }}</td>
+			</tr>
+			</tbody>
+		{% endfor %}
+		</table>
+	</div>
+
+	<hr>
+	<h2>Education Details</h2>
+	<div class="container">
+		<table class="table">
+		{% for education in doc.educational_details %}
+		<thead>
+		<tr>
+			<th>Schoo or College Name</th>
+			<th>University Name</th>
+			<th>Degree</th>
+			<th>Type of Education</th>
+			<th>Year of Passing</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>{{education.schoo_or_college_name}}</td>
+			<td>{{education.university_name}}</td>
+			<td>{{education.degree}}</td>
+			<td>{{education.type_of_education}}</td>
+			<td>{{education.year_of_passing}}</td>
+		</tr>
+		</tbody>
+		{% endfor %}
+		</table>
+	</div>
+
+
+	<hr>
+	<h2>Job Details</h2>
+	<div class="container1">
+		<table class="table">
+		{% for job in doc.job_details %}
+			<thead>
+			<tr>
+				<th>Company Name</th>
+				<th>Post</th>
+				<th>Annual Salary</th>
+			</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>{{job.company_name}}</td>
+				<td>{{job.post}}</td>
+				<td>{{job.annual_salary}}</td>
+			</tr>
+			</tbody>
+		{% endfor %}
+		</table>
+	</div>
+
+{% endblock %}	

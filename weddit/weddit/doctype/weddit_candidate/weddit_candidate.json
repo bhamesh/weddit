@@ -1,6 +1,6 @@
 {
  "allow_copy": 0, 
- "allow_import": 0, 
+ "allow_import": 1, 
  "allow_rename": 0, 
  "autoname": "WCDT.#####", 
  "beta": 0, 
@@ -13,15 +13,26 @@
  "fields": [
   {
    "bold": 1, 
-   "fieldname": "ai_pf", 
+   "fieldname": "profile_photo", 
    "fieldtype": "Attach Image", 
    "label": "Profile Photo"
   }, 
   {
    "bold": 1, 
-   "fieldname": "sb_pi", 
+   "fieldname": "personal_information", 
    "fieldtype": "Section Break", 
    "label": "Personal Information"
+  }, 
+  {
+   "fieldname": "route", 
+   "fieldtype": "Data", 
+   "hidden": 1, 
+   "label": "Route"
+  }, 
+  {
+   "fieldname": "web_view", 
+   "fieldtype": "Check", 
+   "label": "Web view"
   }, 
   {
    "fieldname": "first_name", 
@@ -150,7 +161,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2016-08-12 12:09:31.361178", 
+ "modified": "2016-08-12 17:26:51.448349", 
  "modified_by": "Administrator", 
  "module": "Weddit", 
  "name": "Weddit Candidate", 

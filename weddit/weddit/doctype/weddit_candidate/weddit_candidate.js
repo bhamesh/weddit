@@ -17,9 +17,8 @@ frappe.ui.form.on('Weddit Candidate', {
 			});
 		}
 	},
-	validate: function(frm) {
-		var numbers = /^[0-9]+$/;  
-		if (frm.doc.mobile_no.length != numbers)
+	validate: function(frm) {  
+		if (frm.doc.mobile_no.length != 10)
 		{
 			frappe.throw (__("Please enter valid number!"));
 		}
@@ -30,7 +29,7 @@ frappe.ui.form.on('Weddit Candidate', {
 //    {  
 //       var numbers = /^[0-9]+$/;  
 //       if(inputtxt.value.match(numbers))  
-//       {  
+//       {  b
 //       alert('Your Registration number has accepted....');  
 //       document.form1.text1.focus();  
 //       return true;  

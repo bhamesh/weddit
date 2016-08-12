@@ -1,0 +1,53 @@
+{
+ "allow_comments": 0, 
+ "allow_delete": 0, 
+ "allow_edit": 1, 
+ "allow_multiple": 0, 
+ "creation": "2016-08-12 18:59:05.660438", 
+ "doc_type": "Weddit Candidate", 
+ "docstatus": 0, 
+ "doctype": "Web Form", 
+ "idx": 0, 
+ "is_standard": 1, 
+ "login_required": 1, 
+ "modified": "2016-08-12 18:59:05.660438", 
+ "modified_by": "Administrator", 
+ "module": "Weddit", 
+ "name": "candidate-details", 
+ "owner": "Administrator", 
+ "published": 1, 
+ "route": "candidate-details", 
+ "success_url": "/candidate-details", 
+ "title": "Candidate Details", 
+ "web_form_fields": [
+  {
+   "fieldname": "profile_photo", 
+   "fieldtype": "Attach", 
+   "label": "Profile Photo"
+  }, 
+  {
+   "fieldname": "first_name", 
+   "fieldtype": "Data", 
+   "label": "First Name", 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "last_name", 
+   "fieldtype": "Data", 
+   "label": "Last Name", 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "gender", 
+   "fieldtype": "Select", 
+   "label": "Gender", 
+   "options": "\nMale\nFemale"
+  }, 
+  {
+   "fieldname": "mobile_no", 
+   "fieldtype": "Data", 
+   "label": "Mobile No", 
+   "reqd": 1
+  }
+ ]
+}
