@@ -10,6 +10,7 @@ app_icon = "octicon octicon-organization"
 app_color = "red"
 app_email = "bhams91.kore@gmail.com"
 app_license = "GPL v3"
+app_version = "0.0.1"
 
 # Includes in <head>
 # ------------------
@@ -41,6 +42,8 @@ app_license = "GPL v3"
 
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
+
+website_generators = ["weddit"]
 
 # Installation
 # ------------
