@@ -25,17 +25,20 @@
 						<div>
 							<strong>Last Name</strong>
 						</div>
-						 <div>{{ doc.last_name }} </div>		
+						<div>{{ doc.last_name }} </div>	
+						<div>
+							<strong>Date of Birth</strong>
+						</div>
+						<div>{{ doc.date_of_birth }} </div>
+						<div>
+							<strong>Mobile Number</strong>
+						</div>
+						<div>{{ doc.mobile_no }} </div>
 						<div>
 							<strong>Gender</strong>
 						</div>
 							<div>{{ doc.gender }} </div>
-						<div>
-							<strong>Marital Status</strong>
-						</div>
-							<div>{{ doc.marital_status }} </div>
-					</div>
-					<div class="panel-footer">
+						
 					</div>
 				</div>
 			</div>
@@ -43,12 +46,14 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							Personal Details
+							Other Details
 						</h3>
 					</div>
 					<div class="panel-body">
-						<div><strong>Mobile Number</strong></div>
-						<div>{{ doc.mobile_no }} </div>
+						<div>
+							<strong>Marital Status</strong>
+						</div>
+							<div>{{ doc.marital_status }} </div>
 						<div>
 							<strong>City</strong>
 						</div>
@@ -68,14 +73,12 @@
 						</div>
 						<div>{{ doc.mother_tongue }}</div>
 					</div>
-					<div class="panel-footer">
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<hr>
+	
 	<h2>Other Information</h2>
 
 	<div class="container">
@@ -99,7 +102,7 @@
 		</table>
 	</div>
 
-	<hr>
+	
 	<h2>Education Details</h2>
 	<div class="container">
 		<table class="table">
@@ -127,7 +130,7 @@
 	</div>
 
 
-	<hr>
+	
 	<h2>Job Details</h2>
 	<div class="container1">
 		<table class="table">
@@ -152,7 +155,7 @@
 	</div>
 
 	<div>
-		<a href="http://0.0.0.0:8000/candidate-details" background-color: "#008CBA" class="btn btn-info" role="button">Edit</a>
+		<a href="http://0.0.0.0:8000/candidate-details" background-color: "BLUE	" class="btn btn-info" role="button"  align="middle" >Edit</a>
 	</div>
 
 {% endblock %}	

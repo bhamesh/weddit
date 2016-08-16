@@ -30,11 +30,6 @@
    "label": "Route"
   }, 
   {
-   "fieldname": "web_view", 
-   "fieldtype": "Check", 
-   "label": "Web view"
-  }, 
-  {
    "fieldname": "first_name", 
    "fieldtype": "Data", 
    "label": "First Name", 
@@ -161,7 +156,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2016-08-12 17:26:51.448349", 
+ "modified": "2016-08-16 14:41:39.269393", 
  "modified_by": "Administrator", 
  "module": "Weddit", 
  "name": "Weddit Candidate", 
