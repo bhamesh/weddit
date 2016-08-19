@@ -1,0 +1,124 @@
+<h1>{{doc.name }}</h1>
+
+<div class="form-group">
+		<label>First Name :</label>
+		<input type="text" value="{{doc.first_name}}" class="form-control" name="first_name" id="fn">
+</div>
+<div class="form-group">
+		<label>Last Name :</label>
+		<input type="text" value="{{doc.last_name}}" class="form-control" name="last_name" id="ln">
+</div>
+<div class="form-group">
+		<label>Date of Birth :</label>
+		<input type="date" value="{{doc.date_of_birth}}" class="form-control" name="date_of_birth" id="dob">
+</div>
+<div class="form-group">
+		<label>Mobile No :</label>
+		<input type="text" value="{{doc.mobile_no}}" class="form-control" name="date_of_birth" id="mn">
+</div>
+<div class="form-group">
+	<label for ="gn">Gender :</label>
+		<select class="form-control" id="gn">	
+			<option></option>
+			<option>Female</option>
+			<option>Male</option>
+
+		</select>
+</div>	
+<div class="form-group">
+		<label>Marital Status :</label>
+		<input type="select" class="form-control" name="date_of_birth" id="ms">
+
+</div>
+<div class="form-group">
+		<label>Religion :</label>
+		<input type="select" class="form-control" name="date_of_birth" id="regn">
+
+</div>
+<div class="form-group">
+		<label>Caste :</label>
+		<input type="select" class="form-control" name="date_of_birth" id="caste">
+
+</div>
+<div class="form-group">
+		<label>other Tongue :</label>
+		<input type="select" class="form-control" name="date_of_birth" id="mt">
+
+</div>
+<div class="form-group">
+		<label>City :</label>
+		<input type="select" class="form-control" name="date_of_birth" id="ct">
+
+</div>
+<div id="family_members">
+	<div class="row">
+    	<div class="col-xs-4">First Name</div>
+    	<div class="col-xs-3">Last Name</div>
+    	<div class="col-xs-3">Relation</div>
+    	<div class="col-xs-1"></div>
+    	<div class="col-xs-1"></div>
+  	</div>
+	{% for fm in doc.family_members %}
+		 <div class="row">
+    		<div class="col-xs-4" id="firstname">{{fm.first_name}}</div>
+    		<div class="col-xs-3" id="lastname">{{fm.last_name}}</div>
+    		<div class="col-xs-3" id="relation">{{fm.relation}}</div>
+    		<div class="col-xs-1"><button data-role="update_li" id="{{fm.name}}">Edit</button>
+    			<!-- <input type="button" id="btnEdit" value="Edit" class="Edit" />
+                <input type="button" id="btnUpdate" value="Update" class="Hide Update" /> -->
+    		</div>
+    		<div class="col-xs-1"><button data-role="delete_li" id="{{fm.name}}">Delete</button>
+    			<!-- <input type="button" id="btnDelete" class="Delete" value="Delete" />
+                <input type="button" id="btnCancel" value="Cancel" class="Hide Cancel" /> -->
+    		</div>
+  		</div>
+	{% endfor %}
+		<div class="row">
+    		<div class="col-xs-4"><input type="text" name="first" id="fn"></div>
+    		<div class="col-xs-3"><input type="text" name="last" id="ln"></div>
+    		<div class="col-xs-3"><input type="text" name="relation" id="rel"></div>
+    		<div class="col-xs-1"><button data-pk="">Save</button></div>
+  		</div>
+</div>
+
+		
+<input type="submit" name="edit" id="edit">
+<script type="text/javascript">
+	frappe.ready(function(){
+		$("#edit").on("click", function() {
+			// fn = $("#first_name").val();
+			frappe.call({
+				args: {
+					"docname": "{{doc.name}}",
+					"firstname": $("#fn").val(),
+					"lastname": $("#ln").val(),
+					"dateofbirth" : $("#dob").val(),
+					"mobileno" : $("#mn").val(),
+					"gen" : $("#gn").val(),
+					"marstat" : $("#ms").val(),
+					"relgn" : $("#regn").val(),
+					"cas" : $("#caste").val(),
+					"mothtng" : $("#mt").val(),
+					"city" : $("#ct").val(),
+				},
+				method: "weddit.www.candidate_details.edit_data",
+				callback: function(r) {
+					frappe.msgprint(r.message);
+				}
+			});
+		});
+		$("#update").on("click", function){
+			frappe.call({
+				args:{
+					"fn1": $("fn").val()
+				}
+			})
+		}
+	});
+
+</script>
+
+
+
+
+

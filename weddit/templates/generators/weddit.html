@@ -5,7 +5,7 @@
 	<ul class="candidate">
 		<div>
 			<div><strong>Profile Photo</strong></div> 
-			<img src="{{ profile_photo }}"/>
+			<img src="{{ profile_photo }}"></img>
 			</div>	
 		<br>	
 	</ul>
@@ -155,7 +155,10 @@
 	</div>
 
 	<div>
-		<a href="http://0.0.0.0:8000/candidate-details" background-color: "BLUE	" class="btn btn-info" role="button"  align="middle" >Edit</a>
+<!--		<a href="http://0.0.0.0:8000/candidate-details" background-color: "BLUE	" class="btn btn-info" role="button"  align="middle" >Edit</a>-->
+
+
+		<input type=button onClick="location.href='http://0.0.0.0:8000/candidate-details'" value='Edit'>
 	</div>
 
 {% endblock %}	

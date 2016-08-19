@@ -10,7 +10,7 @@
  "idx": 0, 
  "is_standard": 1, 
  "login_required": 1, 
- "modified": "2016-08-12 18:59:05.660438", 
+ "modified": "2016-08-17 15:52:18.379207", 
  "modified_by": "Administrator", 
  "module": "Weddit", 
  "name": "candidate-details", 
@@ -38,15 +38,55 @@
    "reqd": 1
   }, 
   {
+   "fieldname": "date_of_birth", 
+   "fieldtype": "Date", 
+   "label": "Date of Birth", 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "mobile_no", 
+   "fieldtype": "Data", 
+   "label": "Mobile No", 
+   "reqd": 1
+  }, 
+  {
    "fieldname": "gender", 
    "fieldtype": "Select", 
    "label": "Gender", 
    "options": "\nMale\nFemale"
   }, 
   {
-   "fieldname": "mobile_no", 
-   "fieldtype": "Data", 
-   "label": "Mobile No", 
+   "fieldname": "marital_status", 
+   "fieldtype": "Select", 
+   "label": "Marital Status", 
+   "options": "\nSingle\nDivorced", 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "city", 
+   "fieldtype": "Select", 
+   "label": "City", 
+   "options": "\nMumbai\nNavi-Mumbai\nThane\nPune\nNew Delhi\nBangalore\nHyderabad\nChennai\nKolkata", 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "religion", 
+   "fieldtype": "Select", 
+   "label": "Religion", 
+   "options": "\nHindu\nChristian\nSikh\nBuddhist\nParsi\nJain\nMuslim\nGujarati\nInter-Religion\nNo Religious Belief", 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "caste", 
+   "fieldtype": "Select", 
+   "label": "Caste", 
+   "options": "\nSuryavanshi Kshatriya\nKunbi"
+  }, 
+  {
+   "fieldname": "mother_tongue", 
+   "fieldtype": "Select", 
+   "label": "Mother Tongue", 
+   "options": "\nMarathi\nHindi\nEnglish\nKonkani\nGujarati\nSindhi", 
    "reqd": 1
   }
  ]

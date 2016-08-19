@@ -61,7 +61,7 @@
    "fieldname": "gender", 
    "fieldtype": "Select", 
    "label": "Gender", 
-   "options": "\nMale\nFemale"
+   "options": "Male\nFemale"
   }, 
   {
    "fieldname": "marital_status", 
@@ -156,7 +156,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2016-08-16 14:41:39.269393", 
+ "modified": "2016-08-18 21:24:02.574022", 
  "modified_by": "Administrator", 
  "module": "Weddit", 
  "name": "Weddit Candidate", 
