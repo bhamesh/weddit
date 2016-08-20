@@ -36,13 +36,24 @@ def save_fm(fmid, firstname, lastname, relation):
 
 
 @frappe.whitelist()
-def add_fm(firstname, lastname, relation):
+def add_fm(wcid,firstname, lastname, relation):
 	# return "{fm};{fn};{ln};{rl}".format(fm=fmid,fn=firstname,ln=lastname,rl=relation);
 
 	nfm = frappe.new_doc("Weddit Candidate Family Member")
+	nfm.parent = wcid
+	nfm.parenttype = "Weddit Candidate"
+	nfm.parentfield = "family_members"
 	nfm.first_name = firstname
 	nfm.last_name = lastname
 	nfm.relation = relation
-	nfm.save()
+	nfm.insert()
 	frappe.db.commit()
 	return "New Family Member Add Successfully"
+
+
+@frappe.whitelist()
+def delete_fm(wcid,firstname, lastname, relation):
+	nfm = frappe.new_doc("Weddit Candidate Family Member")
+	nfm.remove()
+	frappe.db.commit()
+	return "Delete Family Member Successfully"

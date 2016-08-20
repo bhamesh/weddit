@@ -105,6 +105,7 @@
 		
 <input type="submit" name="edit" id="edit">
 <script type="text/javascript">
+// edit candidate personal information
 	frappe.ready(function(){
 		$("#edit").on("click", function() {
 			// fn = $("#first_name").val();
@@ -128,6 +129,10 @@
 				}
 			});
 		});
+
+
+// For update candidate family members details
+
 		$("button[data-role='update_li']").on("click", function(){
 			fmid = $(this).attr("data-fmid");
 
@@ -151,7 +156,11 @@
 			span_rl.addClass('hide');
 		});
 
+
+
+// Save updated candidate family members 
 		$("button[data-role='save_li']").on("click", function(){
+
 			fmid = $(this).attr("data-fmid");
 
 			inputid_fn = '#' + fmid + '-fn-edit';
@@ -194,21 +203,51 @@
 		});
 
 
+// Add new candidate family members in a table(family_members)
 		$("#addfm").on("click", function(){
+
 			fn = $("#addfn").val();
 			ln = $("#addln").val();
 			rl = $("#addrel").val();
+			if (fn != '' && ln != '' && rl != '') {
+				frappe.call({
+					args:{
+						"wcid" : "{{doc.name}}",
+						"firstname": fn,
+						"lastname" : ln,
+						"relation" : rl
+					},
+					method:"weddit.www.candidate_details.add_fm",
+						callback: function(r) {
+						frappe.msgprint(r.message);
+						}
+				});
+			}
+			else
+			{
+				alert("please enter all fields");
+			}
+			return false;
+		});
+
+
+		// Delete records 
+		$("button[data-role='delete_li']").on("click", function(){
+			fn = $("#addfn").val();
+			ln = $("#addln").val();
+			rl = $("#addrel").val()
 			frappe.call({
-				args:{
-					"firstname": fn,
-					"lastname" : ln,
-					"relation" : rl
-				},
-				method:"weddit.www.candidate_details.add_fm",
-				callback: function(r) {
-					frappe.msgprint(r.message);
-				}
-			});
+					args:{
+						"wcid" : "{{doc.name}}",
+						"firstname": fn,
+						"lastname" : ln,
+						"relation" : rl
+					},
+					method:"weddit.www.candidate_details.delete_fm",
+						callback: function(r) {
+						frappe.msgprint(r.message);
+						}
+				});
 		});
 
 	});
