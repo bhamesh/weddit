@@ -22,5 +22,27 @@ def edit_data(docname, firstname, lastname,dateofbirth,mobileno,gen,marstat,relg
 	return "Candidate update Successfully"
 
 
-	@frappe.whitelist()
-def update_details(docname, firstname):
+@frappe.whitelist()
+def save_fm(fmid, firstname, lastname, relation):
+	# return "{fm};{fn};{ln};{rl}".format(fm=fmid,fn=firstname,ln=lastname,rl=relation);
+
+	fm = frappe.get_doc("Weddit Candidate Family Member",fmid)
+	fm.first_name = firstname
+	fm.last_name = lastname
+	fm.relation = relation
+	fm.save()
+	frappe.db.commit()
+	return "Candidate Family Details update Successfully"
+
+
+@frappe.whitelist()
+def add_fm(firstname, lastname, relation):
+	# return "{fm};{fn};{ln};{rl}".format(fm=fmid,fn=firstname,ln=lastname,rl=relation);
+
+	nfm = frappe.new_doc("Weddit Candidate Family Member")
+	nfm.first_name = firstname
+	nfm.last_name = lastname
+	nfm.relation = relation
+	nfm.save()
+	frappe.db.commit()
+	return "New Family Member Add Successfully"

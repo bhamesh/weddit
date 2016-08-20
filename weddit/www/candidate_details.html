@@ -59,26 +59,47 @@
     	<div class="col-xs-1"></div>
   	</div>
 	{% for fm in doc.family_members %}
-		 <div class="row">
-    		<div class="col-xs-4" id="firstname">{{fm.first_name}}</div>
-    		<div class="col-xs-3" id="lastname">{{fm.last_name}}</div>
-    		<div class="col-xs-3" id="relation">{{fm.relation}}</div>
-    		<div class="col-xs-1"><button data-role="update_li" id="{{fm.name}}">Edit</button>
-    			<!-- <input type="button" id="btnEdit" value="Edit" class="Edit" />
-                <input type="button" id="btnUpdate" value="Update" class="Hide Update" /> -->
+		 <div class="row" id="{{fm.name}}">
+    		<div class="col-xs-4" id="firstname">
+    			<span id="{{ fm.name + '-fn'}}">
+    				{{fm.first_name}} 
+    			</span>
+    			<input type="text" name="fm1" id="{{ fm.name + '-fn-edit'}}" class="hide">
     		</div>
-    		<div class="col-xs-1"><button data-role="delete_li" id="{{fm.name}}">Delete</button>
-    			<!-- <input type="button" id="btnDelete" class="Delete" value="Delete" />
-                <input type="button" id="btnCancel" value="Cancel" class="Hide Cancel" /> -->
+    		<div class="col-xs-3" id="lastname">
+    			<span id="{{ fm.name + '-ln'}}">
+    				{{fm.last_name}}
+    			</span>
+    			<input type="text" name="fm2" id="{{ fm.name + '-ln-edit'}}" class="hide">
+    		</div>
+    		<div class="col-xs-3" id="relation">
+    			<span id="{{ fm.name + '-rl'}}">
+    				{{fm.relation}}
+    			</span>
+    			<input type="text" name="fm3" id="{{ fm.name + '-rl-edit'}}" class="hide">
+    		</div>
+    		<div class="col-xs-1">
+    			<button data-role="update_li" data-fmid="{{fm.name}}">Edit</button>
+    			<button data-role="save_li" data-fmid="{{fm.name}}">Save</button>
+    		</div>
+    		<div class="col-xs-1">
+    			<button data-role="delete_li" data-fmid="{{fm.name}}">Delete</button>
     		</div>
   		</div>
 	{% endfor %}
+
+
 		<div class="row">
-    		<div class="col-xs-4"><input type="text" name="first" id="fn"></div>
-    		<div class="col-xs-3"><input type="text" name="last" id="ln"></div>
-    		<div class="col-xs-3"><input type="text" name="relation" id="rel"></div>
-    		<div class="col-xs-1"><button data-pk="">Save</button></div>
+    		<div class="col-xs-4"><input type="text" name="first" id="addfn"></div>
+    		<div class="col-xs-3"><input type="text" name="last" id="addln"></div>
+    		<div class="col-xs-3"><input type="text" name="relation" id="addrel"></div>
+    		<div class="col-xs-1">
+    			<button id="addfm">Add</button>
+    		</div>
   		</div>
+
+
+
 </div>
 
 		
@@ -107,13 +128,89 @@
 				}
 			});
 		});
-		$("#update").on("click", function){
+		$("button[data-role='update_li']").on("click", function(){
+			fmid = $(this).attr("data-fmid");
+
+			inputid_fn = '#' + fmid + '-fn-edit';
+			inputid_ln = '#' + fmid + '-ln-edit';
+			inputid_rl = '#' + fmid + '-rl-edit';
+
+			spanid_fn = '#' + fmid + '-fn';
+			spanid_ln = '#' + fmid + '-ln';
+			spanid_rl = '#' + fmid + '-rl';
+
+			span_fn = $(spanid_fn);
+			span_ln = $(spanid_ln);
+			span_rl = $(spanid_rl);
+
+			$(inputid_fn).removeClass('hide').val($.trim(span_fn.text()));
+			span_fn.addClass('hide');
+			$(inputid_ln).removeClass('hide').val($.trim(span_ln.text()));
+			span_ln.addClass('hide');
+			$(inputid_rl).removeClass('hide').val($.trim(span_rl.text()));
+			span_rl.addClass('hide');
+		});
+
+		$("button[data-role='save_li']").on("click", function(){
+			fmid = $(this).attr("data-fmid");
+
+			inputid_fn = '#' + fmid + '-fn-edit';
+			inputid_ln = '#' + fmid + '-ln-edit';
+			inputid_rl = '#' + fmid + '-rl-edit';
+
+			spanid_fn = '#' + fmid + '-fn';
+			spanid_ln = '#' + fmid + '-ln';
+			spanid_rl = '#' + fmid + '-rl';
+
+			span_fn = $(spanid_fn);
+			span_ln = $(spanid_ln);
+			span_rl = $(spanid_rl);
+
+			fn = $(inputid_fn).val();
+			ln = $(inputid_ln).val();
+			rl = $(inputid_rl).val();
+
+			// $(inputid_fn).removeClass('hide').val($.trim(span_fn.text()));
+			// span_fn.addClass('hide');
+			// $(inputid_ln).removeClass('hide').val($.trim(span_ln.text()));
+			// span_ln.addClass('hide');
+			// $(inputid_rl).removeClass('hide').val($.trim(span_rl.text()));
+			// span_rl.addClass('hide');
+
+
 			frappe.call({
 				args:{
-					"fn1": $("fn").val()
+					"fmid" : fmid,
+					"firstname": fn,
+					"lastname" : ln,
+					"relation" : rl
+				},
+				method:"weddit.www.candidate_details.save_fm",
+				callback: function(r) {
+					frappe.msgprint(r.message);
 				}
-			})
-		}
+			});
+
+		});
+
+
+		$("#addfm").on("click", function(){
+			fn = $("#addfn").val();
+			ln = $("#addln").val();
+			rl = $("#addrel").val();
+			frappe.call({
+				args:{
+					"firstname": fn,
+					"lastname" : ln,
+					"relation" : rl
+				},
+				method:"weddit.www.candidate_details.add_fm",
+				callback: function(r) {
+					frappe.msgprint(r.message);
+				}
+			});
+		});
+
 	});
 
 </script>
