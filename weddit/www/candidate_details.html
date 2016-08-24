@@ -59,34 +59,40 @@
     	<div class="col-xs-1"></div>
   	</div>
 	{% for fm in doc.family_members %}
-		 <div class="row" id="{{fm.name}}">
-    		<div class="col-xs-4" id="firstname">
+		 <div class="row" >
+
+    		<div class="col-xs-4">
     			<span id="{{ fm.name + '-fn'}}">
     				{{fm.first_name}} 
     			</span>
     			<input type="text" name="fm1" id="{{ fm.name + '-fn-edit'}}" class="hide">
     		</div>
-    		<div class="col-xs-3" id="lastname">
+
+    		<div class="col-xs-3">
     			<span id="{{ fm.name + '-ln'}}">
     				{{fm.last_name}}
     			</span>
     			<input type="text" name="fm2" id="{{ fm.name + '-ln-edit'}}" class="hide">
     		</div>
-    		<div class="col-xs-3" id="relation">
+
+    		<div class="col-xs-3">
     			<span id="{{ fm.name + '-rl'}}">
     				{{fm.relation}}
     			</span>
     			<input type="text" name="fm3" id="{{ fm.name + '-rl-edit'}}" class="hide">
     		</div>
+
     		<div class="col-xs-1">
     			<button data-role="update_li" data-fmid="{{fm.name}}">Edit</button>
     			<!-- <input type="button" id="btnUpdate" value="Update" class="Hide Update" /> -->
     			<button data-role="save_li" data-fmid="{{fm.name}}">Save</button>
     		</div>
+
     		<div class="col-xs-1" id="delfm">
     			<button class="delclass" data-role="delete_li" data-fmid="{{fm.name}}">Delete</button>
     			<input type="button" id="btnCancel" value="Cancel" class="Hide Cancel" />
     		</div>
+
   		</div>
 	{% endfor %}
 
@@ -160,6 +166,7 @@
 			spanid_ln = '#' + fmid + '-ln';
 			spanid_rl = '#' + fmid + '-rl';
 
+
 			span_fn = $(spanid_fn);
 			span_ln = $(spanid_ln);
 			span_rl = $(spanid_rl);
@@ -191,16 +198,18 @@
 			span_ln = $(spanid_ln);
 			span_rl = $(spanid_rl);
 
+			// For refreshing the content after save button click
+			// col_fn = '#fmid-'+fmid;
+			// col_ln = '#ln-'+fmid;
+			// col_rl = '#rl-'+fmid;
+
+
+
 			fn = $(inputid_fn).val();
 			ln = $(inputid_ln).val();
 			rl = $(inputid_rl).val();
 
-			// $(inputid_fn).removeClass('hide').val($.trim(span_fn.text()));
-			// span_fn.addClass('hide');
-			// $(inputid_ln).removeClass('hide').val($.trim(span_ln.text()));
-			// span_ln.addClass('hide');
-			// $(inputid_rl).removeClass('hide').val($.trim(span_rl.text()));
-			// span_rl.addClass('hide');
+			
 
 
 			frappe.call({
@@ -212,7 +221,20 @@
 				},
 				method:"weddit.www.candidate_details.save_fm",
 				callback: function(r) {
-					frappe.msgprint(r.message);
+					if (!r.exc) {
+
+						$(inputid_fn).addClass('hide');//.val($.trim(span_fn.text()));
+						span_fn.removeClass('hide');
+						$(inputid_ln).addClass('hide');//.val($.trim(span_ln.text()));
+						span_ln.removeClass('hide');
+						$(inputid_rl).addClass('hide');//.val($.trim(span_rl.text()));
+						span_rl.removeClass('hide');
+						
+						$(spanid_fn).load(document.URL + " " + spanid_fn);
+						$(spanid_ln).load(document.URL + " " + spanid_ln);
+						$(spanid_rl).load(document.URL + " " + spanid_rl);
+					}
+					// frappe.msgprint(r.message);
 				}
 			});
 
@@ -265,25 +287,26 @@
 
 		// Delete records from family_memberss
 		$("button[data-role='delete_li']").on("click", function(){
-			fn = $("#addfn").val();
-			ln = $("#addln").val();
-			rl = $("#addrel").val()
-			if (confirm("Do you want to delete the record ?")) {
+			fmid = $(this).attr("data-fmid");
+			var r = confirm("Do you want to delete record ?");
+			if (r == true){
+			 	alert("Family Member deleted successfully..");
 				frappe.call({
 						args:{
-							"wcid" : "{{doc.name}}",
-							"firstname": fn,
-							"lastname" : ln,
-							"relation" : rl
+							"fmid" : fmid
 						},
 
-						method:"weddit.www.candidate_details.delete_fm",
-							callback: function(r) {
-								frappe.msgprint(r.message);
-							}
+					method:"weddit.www.candidate_details.delete_fm",
+					callback: function(r) {
+						frappe.msgprint(r.message);
+					}
 				});
+			}	
+			else
+			{
+				 alert('Some error is occured while deleting.');
 			}
-			return false
+			
 		});
 
 	});

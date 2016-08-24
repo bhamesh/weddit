@@ -52,14 +52,10 @@ def add_fm(wcid,firstname, lastname, relation):
 
 
 @frappe.whitelist()
-def delete_fm(wcid,firstname, lastname, relation):
-	nfm = frappe.model.delete_doc("Weddit Candidate Family Member")
-	nfm.parent = wcid
-	nfm.parenttype = "Weddit Candidate"
-	nfm.parentfield = "family_members"
-	nfm.first_name = firstname
-	nfm.last_name = lastname
-	nfm.relation = relation
-	
+def delete_fm(fmid):
+	frappe.delete_doc("Weddit Candidate Family Member",fmid)
+	# nfm.parent = wcid
+	# nfm.parenttype = "Weddit Candidate"
+	# nfm.parentfield = "family_members"
 	frappe.db.commit()
 	return "Delete Family Member Successfully"
