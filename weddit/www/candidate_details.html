@@ -80,19 +80,21 @@
     		</div>
     		<div class="col-xs-1">
     			<button data-role="update_li" data-fmid="{{fm.name}}">Edit</button>
+    			<!-- <input type="button" id="btnUpdate" value="Update" class="Hide Update" /> -->
     			<button data-role="save_li" data-fmid="{{fm.name}}">Save</button>
     		</div>
-    		<div class="col-xs-1">
-    			<button data-role="delete_li" data-fmid="{{fm.name}}">Delete</button>
+    		<div class="col-xs-1" id="delfm">
+    			<button class="delclass" data-role="delete_li" data-fmid="{{fm.name}}">Delete</button>
+    			<input type="button" id="btnCancel" value="Cancel" class="Hide Cancel" />
     		</div>
   		</div>
 	{% endfor %}
 
 
-		<div class="row">
-    		<div class="col-xs-4"><input type="text" name="first" id="addfn"></div>
-    		<div class="col-xs-3"><input type="text" name="last" id="addln"></div>
-    		<div class="col-xs-3"><input type="text" name="relation" id="addrel"></div>
+		<div class="row" id="newfm">
+    		<div class="col-xs-4"><input type="text" name="first" id="addfn" required="true"></div>
+    		<div class="col-xs-3"><input type="text" name="last" id="addln" required="true"></div>
+    		<div class="col-xs-3"><input type="text" name="relation" id="addrel" required="true"></div>
     		<div class="col-xs-1">
     			<button id="addfm">Add</button>
     		</div>
@@ -102,11 +104,25 @@
 
 </div>
 
-		
+<style type="text/css">
+	.invalid{
+		border: solid 2px red;
+	}
+
+</style>	
 <input type="submit" name="edit" id="edit">
 <script type="text/javascript">
 // edit candidate personal information
 	frappe.ready(function(){
+		// $(document).tooltip();
+		// $(document).tooltip({
+		// 		position: {my: "left top", at: "right top"},
+		// 	  	items: "input[required=true]",
+		// 	  	content: function() { 
+		// 	  		return $(this).attr( "title" ); 
+		// 	  	}
+		// });
+
 		$("#edit").on("click", function() {
 			// fn = $("#first_name").val();
 			frappe.call({
@@ -205,11 +221,25 @@
 
 // Add new candidate family members in a table(family_members)
 		$("#addfm").on("click", function(){
+			//for validation if all field are blank	
+			var valid = true;
+			$("#newfm input[required=true]").each(function(){
+				$(this).removeClass('invalid');
+				$(this).attr('title','');
+				if(!$(this).val()){ 
+					$(this).addClass('invalid');
+					$(this).attr('title','This field is required');
 
-			fn = $("#addfn").val();
-			ln = $("#addln").val();
-			rl = $("#addrel").val();
-			if (fn != '' && ln != '' && rl != '') {
+					valid = false;
+				}
+
+				
+			});
+			if (valid) {
+				fn = $("#addfn").val();
+				ln = $("#addln").val();
+				rl = $("#addrel").val();
+			// if (fn != '' && ln != '' && rl != '') {
 				frappe.call({
 					args:{
 						"wcid" : "{{doc.name}}",
@@ -223,31 +253,37 @@
 						}
 				});
 			}
-			else
-			{
-				alert("please enter all fields");
-			}
-			return false;
+			return valid;
+			// }
+			// else
+			// {
+			// 	alert("please enter all fields");
+			// }
+			// return false;
 		});
 
 
-		// Delete records 
+		// Delete records from family_memberss
 		$("button[data-role='delete_li']").on("click", function(){
 			fn = $("#addfn").val();
 			ln = $("#addln").val();
 			rl = $("#addrel").val()
-			frappe.call({
-					args:{
-						"wcid" : "{{doc.name}}",
-						"firstname": fn,
-						"lastname" : ln,
-						"relation" : rl
-					},
-					method:"weddit.www.candidate_details.delete_fm",
-						callback: function(r) {
-						frappe.msgprint(r.message);
-						}
+			if (confirm("Do you want to delete the record ?")) {
+				frappe.call({
+						args:{
+							"wcid" : "{{doc.name}}",
+							"firstname": fn,
+							"lastname" : ln,
+							"relation" : rl
+						},
+
+						method:"weddit.www.candidate_details.delete_fm",
+							callback: function(r) {
+								frappe.msgprint(r.message);
+							}
 				});
+			}
+			return false
 		});
 
 	});
